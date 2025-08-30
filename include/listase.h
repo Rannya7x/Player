@@ -2,12 +2,12 @@
 #define LISTA_SE_H
 
 typedef int (*cmp_func)(void* a, void* b);
-typedef void (*destruir_func)(void* p);
-typedef void (*print_func)(void* p);
+typedef void (*destruir_func)(void* p); 
+typedef void (*print_func)(void* p); 
 
 typedef struct lse t_lse;
 
-t_lse* lse_criar();
+t_lse* lse_criar(cmp_func* comparar, destruir_func* destruir, print_func* imprimir);
 void lse_destruir(t_lse* l, destruir_func destruir);
 void lse_inserir_inicio(t_lse* l, void* carga);
 void lse_inserir_final(t_lse* l, void* carga);

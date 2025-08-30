@@ -10,6 +10,9 @@ struct lse {
     t_no* inicio;
     t_no* final;
     int tamanho;
+    cmp_func comparar;
+    destruir_func destruir;
+    print_func imprimir;
 };
 
 t_no* no_criar(void* carga, t_no* prox) {
@@ -20,12 +23,15 @@ t_no* no_criar(void* carga, t_no* prox) {
     return no;
 }
 
-t_lse* lse_criar() {
+t_lse* lse_criar(cmp_func* comparar, destruir_func* destruir, print_func* imprimir) {
     t_lse* l = (t_lse*) malloc(sizeof(t_lse));
     if (!l) return NULL;
     l->inicio = NULL;
     l->final = NULL;
     l->tamanho = 0;
+    l->comparar = comparar;
+    l->destruir = destruir;
+    l->imprimir = imprimir;
     return l;
 }
 
