@@ -28,7 +28,7 @@ t_musica* musica_criar(char* nome, char* genero, int duracao, char* album, char*
 void musica_imprimir(void* p) {
     t_musica* msc = (t_musica*)p;
     assert(msc != NULL);
-    printf( "Nome: %s\n", msc->nome);
+    printf( "%s (%s, %d) [%ds]\n", msc->nome, msc->cantor, msc->ano, msc->duracao);
 }
 
 int musica_cmp_nome(void* carga, void* chave) {
@@ -43,5 +43,4 @@ void musica_destruir(void* p) {
     t_musica* msc = (t_musica*)p;
     assert(msc != NULL);
     free(msc);
-    return NULL;
 }
