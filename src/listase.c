@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "listase.h"
+#include "../include/listase.h"
 
 typedef struct no {
     void* carga;
@@ -23,7 +23,7 @@ t_no* no_criar(void* carga, t_no* prox) {
     return no;
 }
 
-t_lse* lse_criar(cmp_func* comparar, destruir_func* destruir, print_func* imprimir) {
+t_lse* lse_criar(cmp_func comparar, destruir_func destruir, print_func imprimir) {
     t_lse* l = (t_lse*) malloc(sizeof(t_lse));
     if (!l) return NULL;
     l->inicio = NULL;
