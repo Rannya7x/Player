@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include "../include/musica.h"
 
 struct musica {
@@ -33,20 +32,25 @@ t_musica* musica_criar(const char* nome, const char* genero, int duracao, const 
 
 void musica_imprimir(void* p) {
     t_musica* msc = (t_musica*)p;
-    assert(msc != NULL);
+    if(msc == NULL) {
+        return;
+    }
     printf( "%s (%s, %d) [%ds]\n", msc->nome, msc->cantor, msc->ano, msc->duracao);
 }
 
 int musica_cmp_nome(void* carga, void* chave) {
     t_musica* msc = (t_musica*)carga;
     char* nome_chave = (char*)chave;
-    assert(msc != NULL);
-    assert(chave != NULL);
+    if(msc == NULL || nome_chave == NULL) {
+        return -1; 
+    }
     return strcmp(msc->nome, nome_chave);
 }
 
 void musica_destruir(void* p) {
     t_musica* msc = (t_musica*)p;
-    assert(msc != NULL);
+    if(msc == NULL) {
+        return;
+    }
     free(msc);
 }

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <assert.h>
 #include "../include/playlist.h"
 #include "../include/listase.h"
 #include "../include/musica.h"
@@ -10,7 +9,9 @@ struct playlist {
 
 t_playlist* playlist_criar() {
     t_playlist* nova = malloc(sizeof(t_playlist)); 
-    assert(nova != NULL);
+    if(!nova) {
+        return NULL;
+    }
     nova->fila = lse_criar(musica_cmp_nome, musica_destruir, musica_imprimir);
     
     if(nova->fila == NULL) {
@@ -21,7 +22,7 @@ t_playlist* playlist_criar() {
 }
 
 void playlist_destruir(t_playlist* pl) {
-    assert(pl != NULL);
+    if(!pl){ return; }
     lse_destruir(pl->fila, NULL);
     pl->fila = NULL;
     free(pl);
@@ -49,11 +50,10 @@ void* playlist_remover_por_nome(t_playlist* pl, const char* nome) {
 
 void playlist_tocar(t_playlist* pl) {
     if(!pl){ return; }
-    printf("Tocando playlist...\n");
     lse_imprimir(pl->fila, musica_imprimir);
 }
 
 int playlist_tamanho(t_playlist* pl) {
-    if(!pl){ return -1; } //lista vazia
+    if(!pl){ return -1; } 
     return lse_tamanho(pl->fila);
 }
