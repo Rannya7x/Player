@@ -34,7 +34,6 @@ void playlist_inserir_final(t_playlist* pl, void* m) {
 
 void* playlist_remover_inicio(t_playlist* pl) {
     if(!pl){ return NULL; }
-
     return lse_remover_inicio(pl->fila);
 }
 
