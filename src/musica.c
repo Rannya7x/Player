@@ -13,7 +13,7 @@ struct musica {
     int ano;
 };
 
-t_musica* musica_criar(char* nome, char* genero, int duracao, char* album, char* cantor, int ano) {
+t_musica* musica_criar(const char* nome, const char* genero, int duracao, const char* album, const char* cantor, int ano) {
     t_musica* msc = malloc(sizeof(t_musica));
     if(msc == NULL) {
         return NULL;

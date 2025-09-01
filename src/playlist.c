@@ -49,6 +49,7 @@ void* playlist_remover_por_nome(t_playlist* pl, const char* nome) {
 
 void playlist_tocar(t_playlist* pl) {
     if(!pl){ return; }
+    printf("Tocando playlist...\n");
     lse_imprimir(pl->fila, musica_imprimir);
 }
 
