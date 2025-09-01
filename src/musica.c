@@ -15,7 +15,13 @@ struct musica {
 
 t_musica* musica_criar(char* nome, char* genero, int duracao, char* album, char* cantor, int ano) {
     t_musica* msc = malloc(sizeof(t_musica));
-    assert(msc != NULL);
+    if(msc == NULL) {
+        return NULL;
+    }
+    if (nome == NULL || genero == NULL || album == NULL || cantor == NULL || duracao <= 0 || ano <= 0) {
+        free(msc);
+        return NULL;
+    }
     strcpy(msc->nome, nome);
     strcpy(msc->genero, genero);
     msc->duracao = duracao;
