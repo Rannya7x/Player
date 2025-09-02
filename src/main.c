@@ -115,9 +115,6 @@ int main() {
         case 7:
             printf("Nome: ");
             ler_linha(nome, sizeof(nome));
-            if(!nome) {
-                break;
-            }
             printf("Tocando musica: ");
             player_tocar_musica(pl, nome);
             break;
