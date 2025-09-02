@@ -115,6 +115,18 @@ void* lse_buscar(t_lse* l, void* chave, cmp_func cmp) {
     return atual ? atual->carga : NULL;
 }
 
+void* lse_acessar(t_lse* l, int pos) {
+    if(!l || pos < 0 || pos >= l->tamanho) {
+        return NULL;
+    }
+    t_no* atual = l->inicio;
+    while(pos > 0 && atual != NULL) {
+        atual = atual->prox;
+        pos--;
+    }
+    return atual? atual->carga : NULL;
+}
+
 void* lse_remover_inicio(t_lse* l) {
     if (!l || !l->inicio) return NULL;
 

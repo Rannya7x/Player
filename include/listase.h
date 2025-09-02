@@ -12,6 +12,7 @@ void lse_destruir(t_lse* l, destruir_func destruir);
 void lse_inserir_inicio(t_lse* l, void* carga);
 void lse_inserir_final(t_lse* l, void* carga);
 void lse_inserir_ordenado(t_lse* l, void* carga, cmp_func cmp);
+void* lse_acessar(t_lse* l, int pos);
 void* lse_buscar(t_lse* l, void* chave, cmp_func cmp);
 void* lse_remover_inicio(t_lse* l);
 void* lse_remover_por_nome(t_lse* l, void* chave, cmp_func cmp);
