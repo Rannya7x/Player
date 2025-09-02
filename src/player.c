@@ -129,7 +129,7 @@ void player_tocar_ultimas_k_musicas(t_player* p, int k) {
         k = historico_tamanho;
     }
     for(int posicao = 0; posicao < k; posicao++){
-        t_musica* msc = lse_remover_inicio(p->historico);
+        t_musica* msc = lse_acessar(p->historico, posicao);
         if(!msc){
             return;
         }
