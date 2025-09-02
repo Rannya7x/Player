@@ -8,7 +8,7 @@ void player_destruir(t_player* p);
 void player_add_biblioteca(t_player* p, void* m);
 void player_add_playlist(t_player* p, void* m);
 void* player_buscar_biblioteca_por_nome(t_player* p, const char* nome);
-void player_remover_biblioteca_por_nome(t_player* p, const char* nome);
+void* player_remover_biblioteca_por_nome(t_player* p, const char* nome);
 void* player_remover_playlist_por_nome(t_player* p, const char* nome);
 void player_tocar_playlist(t_player* p);
 void player_tocar_musica(t_player* p, const char* nome);
