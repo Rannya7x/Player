@@ -68,16 +68,26 @@ int main() {
                 break;
             }
             player_add_biblioteca(pl, musica);
+            puts("Musica adicionada a biblioteca!");
             break;
         case 2:
             printf("Nome para buscar: ");
             ler_linha(nome, sizeof(nome));
-            player_buscar_biblioteca_por_nome(pl, nome);
+            musica = player_buscar_biblioteca_por_nome(pl, nome);
+            if(!musica) {
+                break;
+            }
+            printf("Musica encontrada: ");
+            musica_imprimir(musica);
             break;
         case 3:
             printf("Nome: ");
             ler_linha(nome, sizeof(nome));
-            player_remover_biblioteca_por_nome(pl, nome);
+            musica = player_remover_biblioteca_por_nome(pl, nome);
+            if(musica) {
+                break;
+            }
+            puts("Musica removida da biblioteca!");
             break;
         case 4:
             printf("Nome: ");
@@ -87,18 +97,28 @@ int main() {
                 break;
             }
             player_add_playlist(pl, musica);
+            puts("Musica inserida na playlist!");
             break;
         case 5:
             printf("Nome: ");
             ler_linha(nome, sizeof(nome));
-            player_remover_playlist_por_nome(pl, nome);
+            musica = player_remover_playlist_por_nome(pl, nome);
+            if(musica) {
+                break;
+            }
+            puts("Musica removida da playlist!");
             break;
         case 6:
+            puts("Tocando playlist...");
             player_tocar_playlist(pl);
             break;
         case 7:
             printf("Nome: ");
             ler_linha(nome, sizeof(nome));
+            if(!nome) {
+                break;
+            }
+            printf("Tocando musica: ");
             player_tocar_musica(pl, nome);
             break;
         case 8:
