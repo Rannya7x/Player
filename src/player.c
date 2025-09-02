@@ -53,7 +53,6 @@ void player_add_biblioteca(t_player* p, void* m) {
     }
     lse_inserir_ordenado(p->biblioteca, m, musica_cmp_nome);
     lse_inserir_inicio(p->historico, m);
-    puts("Musica adicionada a biblioteca!");
 }
 
 void player_add_playlist(t_player* p, void* m) {
@@ -61,7 +60,6 @@ void player_add_playlist(t_player* p, void* m) {
         return;
     }
     playlist_inserir_final(p->playlist, m);
-    puts("Musica inserida na playlist!");
 }
 
 void* player_buscar_biblioteca_por_nome(t_player* p, const char* nome) {
@@ -72,20 +70,24 @@ void* player_buscar_biblioteca_por_nome(t_player* p, const char* nome) {
     if(!musica){
         return NULL;
     }
-    printf("Musica encontrada: ");
     return musica;
 }
 
-void player_remover_biblioteca_por_nome(t_player* p, const char* nome) {
+void* player_remover_biblioteca_por_nome(t_player* p, const char* nome) {
     if(!p || !nome){
-        return;
+        return NULL;
     }
+    playlist_remover_por_nome(p->playlist, nome); 
+    lse_remover_por_nome(p->historico, (void*)nome, musica_cmp_nome); 
+    
     void* musica = lse_remover_por_nome(p->biblioteca, (void*)nome, musica_cmp_nome);
     if(!musica){
-        return;
+        return NULL;
     }
     musica_destruir(musica);
-    puts("Musica removida da biblioteca!");
+
+    void* removida = lse_buscar(p->biblioteca, (void*)nome, musica_cmp_nome);//verifica se foi removida
+    return removida;
 }
 
 void* player_remover_playlist_por_nome(t_player* p, const char* nome) {
@@ -93,7 +95,6 @@ void* player_remover_playlist_por_nome(t_player* p, const char* nome) {
         return NULL;
     }
     void* removido = playlist_remover_por_nome(p->playlist, nome);
-    puts("Musica removida da playlist!");
     return removido;
 }
 
@@ -101,7 +102,6 @@ void player_tocar_playlist(t_player* p) {
     if(!p){
         return;
     }
-    puts("Tocando playlist...");
     playlist_tocar(p->playlist);
 }
 
@@ -113,7 +113,6 @@ void player_tocar_musica(t_player* p, const char* nome) {
     if(!musica){
         return;
     }
-    printf("Tocando musica: ");
     musica_imprimir(musica);
 
 }
@@ -130,7 +129,7 @@ void player_tocar_ultimas_k_musicas(t_player* p, int k) {
         k = historico_tamanho;
     }
     for(int posicao = 0; posicao < k; posicao++){
-        t_musica* msc = lse_buscar(p->historico, (void*)(intptr_t)posicao, NULL);
+        t_musica* msc = lse_remover_inicio(p->historico);
         if(!msc){
             return;
         }
