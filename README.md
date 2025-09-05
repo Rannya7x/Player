@@ -152,13 +152,13 @@ O comando gerará um executável final ./a.out. Execute no terminal:
 
 ## Política de memória adotada para destruição de músicas
 
-# Gerenciamento
+### Gerenciamento
 
 - Biblioteca: Proprietária das músicas. Responsável por alocar e destruir (musica_destruir()) os objetos música.
 - Playlist: Armazena apenas referências para músicas da biblioteca. Não aloca nem destrói músicas.
 - Histórico: Armazena apenas referências para músicas da biblioteca. Não aloca nem destrói músicas.
 
-# Fluxo de Memória
+### Fluxo de Memória
 
 1. Música é criada e adicionada à biblioteca (proprietária);
 2. referências da mesma música podem ser adicionadas à playlist e histórico;
