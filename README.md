@@ -15,14 +15,13 @@ Implementar um **tocador de música** em C que manipula **playlists** e **músic
 
 ---
 
-## Estruturas fornecidas
+## Estruturas fornecidas pelo professor
+
 - `listase.h / listase.c`: implementação de uma **lista simplesmente encadeada genérica** (com `void*` e callbacks).
-- Você **não pode alterar** esse código.
-- Deve **reaproveitá-lo** para implementar `playlist` e `player`.
 
 ---
 
-## Estruturas a implementar
+## Estruturas implementadas por mim
 
 ### 🎶 TAD Música (`musica.h/.c`)
 Representa uma música com os atributos:
@@ -33,7 +32,7 @@ Representa uma música com os atributos:
 - cantor(a) (string até 60 chars),
 - ano (int).
 
-Deve fornecer:
+Funcionalidades:
 - Função construtora (`musica_criar`),
 - Função destrutora (`musica_destruir`),
 - Callback de impressão (`musica_imprimir`),
@@ -60,12 +59,16 @@ Gerencia:
 - A **biblioteca de músicas** (lista genérica),
 - A **playlist atual** (instância de `t_playlist`).
 
-Operações mínimas:
+Funcionalidades:
 - Adicionar música na biblioteca,
 - Buscar música na biblioteca por nome,
 - Inserir músicas da biblioteca na playlist,
+- Remover músicas da biblioteca,
+- Remover músicas da playlist,
 - Reproduzir playlist atual,
-- Reproduzir música individual.
+- Reproduzir música individual,
+- Reproduzir ultimas k músicas adicionada à bibioteca,
+- Exportar biblioteca em formato .txt (apenas sistemas linux)
 
 ---
 
@@ -133,22 +136,36 @@ Fechando player...
 
 ---
 
-## Entrega
-1. Código-fonte completo (`.h/.c`) + `Makefile`;
-2. `README.md` explicando:
-   - Como compilar e executar;
-   - Política de memória adotada (quem destrói músicas? playlist ou biblioteca?);
-   - Funcionalidades implementadas;
-3. Exemplos de execução.
+## Como compilar e executar
+
+Dentro da pasta src, abra um terminal e rode o comando:
+
+```bash
+gcc *.c
+```
+
+O comando gerará um executável final ./a.out. Execute no terminal:
+
+```bash
+./a.out
+```
+
+## Política de memória adotada para destruição de músicas
+
+# Gerenciamento
+
+- Biblioteca: Proprietária das músicas. Responsável por alocar e destruir (musica_destruir()) os objetos música.
+- Playlist: Armazena apenas referências para músicas da biblioteca. Não aloca nem destrói músicas.
+- Histórico: Armazena apenas referências para músicas da biblioteca. Não aloca nem destrói músicas.
+
+# Fluxo de Memória
+
+1. Música é criada e adicionada à biblioteca (proprietária);
+2. referências da mesma música podem ser adicionadas à playlist e histórico;
+3. ao remover música da biblioteca, ela é destruída automaticamente;
+4. playlist e histórico mantêm consistência através das referências.
+
+Esta arquitetura evita vazamentos de memória e duplicação desnecessária de dados.
 
 ---
 
-## Critérios de avaliação
-- **40%** – Uso correto do TAD lista (`lse`) sem alterar sua implementação;
-- **30%** – Funcionalidade correta das operações (playlist + player);
-- **20%** – Organização modular e política de memória;
-- **10%** – Funcionalidades extras (ex.: playlist ordenada, últimas K músicas, exportação).
-
----
-
-Boa implementação! 🚀
